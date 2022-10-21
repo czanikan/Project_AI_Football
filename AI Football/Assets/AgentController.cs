@@ -25,19 +25,17 @@ public class AgentController : Agent
 
     public override void Initialize()
     {
-        base.Initialize();
-
         rb = GetComponent<Rigidbody>();
         behaviorParameters = GetComponent<BehaviorParameters>();
     }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        base.OnActionReceived(actions);
-
         var actionTaken = actions.DiscreteActions[0];
 
         Vector3 direction = Vector3.zero;
+
+        Debug.Log(actionTaken);
 
         switch (actionTaken)
         {
@@ -60,32 +58,35 @@ public class AgentController : Agent
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        base.Heuristic(actionsOut);
-
         ActionSegment<int> actions = actionsOut.DiscreteActions;
 
-        var h = Input.GetAxisRaw("Horizontal");
-        var v = Input.GetAxisRaw("Vertical");
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
 
         if (h == -1)
         {
             actions[0] = (int)ACTIONS.LEFT;
+            Debug.Log((int)ACTIONS.LEFT);
         }
         else if (h == +1)
         {
             actions[0] = (int)ACTIONS.RIGHT;
+            Debug.Log(actions[0]);
         }
         else if (v == +1)
         {
             actions[0] = (int)ACTIONS.FORWARD;
+            Debug.Log(actions[0]);
         }
         else if (v == -1)
         {
             actions[0] = (int)ACTIONS.BACKWARD;
+            Debug.Log(actions[0]);
         }
         else
         {
             actions[0] = 3;
+            Debug.Log("No action");
         }
     }
 

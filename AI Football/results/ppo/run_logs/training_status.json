@@ -1,0 +1,29 @@
+{
+    "Soccer": {
+        "checkpoints": [
+            {
+                "steps": 576,
+                "file_path": "results\\ppo\\Soccer\\Soccer-576.onnx",
+                "reward": null,
+                "creation_time": 1666374607.6573215,
+                "auxillary_file_paths": [
+                    "results\\ppo\\Soccer\\Soccer-576.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 576,
+            "file_path": "results\\ppo\\Soccer.onnx",
+            "reward": null,
+            "creation_time": 1666374607.6573215,
+            "auxillary_file_paths": [
+                "results\\ppo\\Soccer\\Soccer-576.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
