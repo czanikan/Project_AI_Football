@@ -5,21 +5,36 @@ using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Policies;
 
+public enum Team
+{
+    Blue = 0,
+    Red = 1
+}
 public class AgentController : Agent
 {
     [HideInInspector]
     public Rigidbody rb;
+    public float kickPower;
     private BehaviorParameters behaviorParameters;
+
+    private GameManager gameManager;
 
     public float moveSpeed;
     public float agentMoveSpeed;
+
+    public Vector3 startPos;
+
+    public Team team;
+    EnvironmentParameters resetParams;
+    private float ballTouch;
 
     private enum ACTIONS
     {
         LEFT = 0,
         FORWARD = 1,
         RIGHT = 2,
-        BACKWARD = 3
+        BACKWARD = 3,
+        IDLE = 4
     }
 
 
@@ -27,6 +42,21 @@ public class AgentController : Agent
     {
         rb = GetComponent<Rigidbody>();
         behaviorParameters = GetComponent<BehaviorParameters>();
+
+        gameManager = GetComponentInParent<GameManager>();
+
+        if (behaviorParameters.TeamId == (int)Team.Blue)
+        {
+            team = Team.Blue;
+            startPos = new Vector3(transform.position.x - 5f, .5f, transform.position.z);
+        }
+        else
+        {
+            team = Team.Red;
+            startPos = new Vector3(transform.position.x + 5f, .5f, transform.position.z);
+        }
+
+        resetParams = Academy.Instance.EnvironmentParameters;
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -34,8 +64,6 @@ public class AgentController : Agent
         var actionTaken = actions.DiscreteActions[0];
 
         Vector3 direction = Vector3.zero;
-
-        Debug.Log(actionTaken);
 
         switch (actionTaken)
         {
@@ -50,6 +78,9 @@ public class AgentController : Agent
                 break;
             case (int)ACTIONS.LEFT:
                 direction = transform.right * -moveSpeed;
+                break;
+            case (int)ACTIONS.IDLE:
+                direction = Vector3.zero;
                 break;
         }
 
@@ -66,28 +97,41 @@ public class AgentController : Agent
         if (h == -1)
         {
             actions[0] = (int)ACTIONS.LEFT;
-            Debug.Log((int)ACTIONS.LEFT);
         }
         else if (h == +1)
         {
             actions[0] = (int)ACTIONS.RIGHT;
-            Debug.Log(actions[0]);
         }
         else if (v == +1)
         {
             actions[0] = (int)ACTIONS.FORWARD;
-            Debug.Log(actions[0]);
         }
         else if (v == -1)
         {
             actions[0] = (int)ACTIONS.BACKWARD;
-            Debug.Log(actions[0]);
         }
         else
         {
-            actions[0] = 3;
-            Debug.Log("No action");
+            actions[0] = (int)ACTIONS.IDLE;
         }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ball"))
+        {
+            AddReward(.2f * ballTouch);
+            var dir = collision.contacts[0].point - transform.position;
+            dir = dir.normalized;
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(dir * kickPower);
+
+            Debug.Log("Ball Kicked");
+        }
+    }
+
+    public override void OnEpisodeBegin()
+    {
+        ballTouch = resetParams.GetWithDefault("ball_touch", 0);
     }
 
 }
