@@ -15,10 +15,12 @@ public class Ball : MonoBehaviour
         if (other.gameObject.CompareTag("BlueGoal"))
         {
             gm.Goal("Red");
+            Debug.Log("Red team scored a goal!");
         }
         if (other.gameObject.CompareTag("RedGoal"))
         {
             gm.Goal("Blue");
+            Debug.Log("Blue team scored a goal!");
         }
     }
 }
