@@ -10,7 +10,7 @@ public class Ball : MonoBehaviour
         gm = GetComponentInParent<GameManager>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("BlueGoal"))
         {

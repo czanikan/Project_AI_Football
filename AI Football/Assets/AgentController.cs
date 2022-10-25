@@ -131,7 +131,7 @@ public class AgentController : Agent
 
     public override void OnEpisodeBegin()
     {
-        ballTouch = resetParams.GetWithDefault("ball_touch", 0);
+        ballTouch = resetParams.GetWithDefault("ball_touch", 1);
     }
 
 }
