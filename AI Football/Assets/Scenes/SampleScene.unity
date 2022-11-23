@@ -353,7 +353,7 @@ PrefabInstance:
     - target: {fileID: 129518723139571634, guid: 85b3e946b912ef047afa7bcf39e881d4, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 105f3c4c4b399ea428262102bb30a54f, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: ad8d300c0f6477349ba793be9e0a2793, type: 3}
     - target: {fileID: 129518723139571634, guid: 85b3e946b912ef047afa7bcf39e881d4, type: 3}
       propertyPath: m_UseChildSensors
       value: 1
@@ -377,7 +377,7 @@ PrefabInstance:
     - target: {fileID: 129518724157643866, guid: 85b3e946b912ef047afa7bcf39e881d4, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 105f3c4c4b399ea428262102bb30a54f, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: ad8d300c0f6477349ba793be9e0a2793, type: 3}
     - target: {fileID: 129518724157643866, guid: 85b3e946b912ef047afa7bcf39e881d4, type: 3}
       propertyPath: m_UseChildSensors
       value: 1
