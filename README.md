@@ -1,8 +1,9 @@
 # Project AI Football
 This project was created as a supplement to my thesis. It aims to demonstrate the creation of an environment using the Unity ML-Agents framework.
 
-# Hi, I'm Andy! 👋
+![First level gif](https://github.com/czanikan/Project-UFO/blob/master/gifs/Level1Cropped.gif)
 
+# Hi, I'm Andy! 👋
 
 ## 🚀 About Me
 I'm a computer science student at the University of Debrecen, Hungary.
